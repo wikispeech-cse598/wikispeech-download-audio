@@ -10,15 +10,21 @@ Wikispeech lets users listen to Wikipedia articles in their browser. Until now, 
 
 The feature is built from five separable pieces:
 
-| Piece | Phabricator task | What it does | Gerrit patch |
-|---|---|---|---|
-| Download request API | [T402522](https://phabricator.wikimedia.org/T402522) | Accepts "I want a download of article X in voice Y" | [1270914](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1270914) |
-| Download announcement | [T403152](https://phabricator.wikimedia.org/T403152) | Synthesises the spoken license/attribution intro | [1270609](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1270609) |
-| Download job | [T407468](https://phabricator.wikimedia.org/T407468) | Background worker that assembles the audio file | [1271020](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1271020) |
-| Echo notification | [T402528](https://phabricator.wikimedia.org/T402528) | Notifies the user when their download is ready |  [1271020](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1271020)  |
-| Special page UI | [T402526](https://phabricator.wikimedia.org/T402526) | User-facing page to submit and manage downloads | [1271979](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1271979) |
+| Piece | Phabricator task | What it does | Gerrit patch | Status |
+|---|---|---|---|---|
+| Download request API | [T402522](https://phabricator.wikimedia.org/T402522) | Accepts "I want a download of article X in voice Y" | [1270914](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1270914) | PS2, in review |
+| Download announcement | [T403152](https://phabricator.wikimedia.org/T403152) | Synthesises the spoken license/attribution intro | [1270609](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1270609) | PS2, review comments addressed |
+| Download job | [T407468](https://phabricator.wikimedia.org/T407468) | Background worker that assembles the audio file | [1271020](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1271020) | PS2, in review |
+| Echo notification | [T402528](https://phabricator.wikimedia.org/T402528) | Notifies the user when their download is ready | *(local only)* | Held, pending design confirmation |
+| Special page UI | [T402526](https://phabricator.wikimedia.org/T402526) | User-facing page to submit and manage downloads | [1271979](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1271979) | PS1, needs rebase onto chain |
 
 All five together deliver the full feature: a user navigates to `Special:DownloadPageAudio`, picks an article and voice, clicks "Request new download," receives a notification when ready, and downloads an `.opus` file whose first ~15 seconds announce the article's source and license, followed by the article body.
+
+> **Current state of every patch — what's been pushed, what's pending, and what
+> a fresh session needs to know — is tracked in
+> [`docs/patch-status.md`](docs/patch-status.md).** Day-to-day dev machine
+> specifics (Windows/PowerShell, phan, line endings) are in
+> [`docs/dev-environment-notes.md`](docs/dev-environment-notes.md).
 
 ## Contributors
 
