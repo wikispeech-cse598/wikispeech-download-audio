@@ -5,7 +5,7 @@
 > `docs/dev-environment-notes.md`, then the per-task implementation briefs.
 > Update the "Snapshot" table and "Work done" log whenever state changes.
 
-Last updated: **2026-07-05**
+Last updated: **2026-07-06**
 
 ---
 
@@ -18,7 +18,7 @@ lives in is only companion documentation + demo.
 
 | Task | What | Gerrit change | Latest PS | CI (Verified) | Review state | Next action |
 |---|---|---|---|---|---|---|
-| [T403152](https://phabricator.wikimedia.org/T403152) | Download announcement | [1270609](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1270609) | **PS2** | was +2 on PS1 | Viktoria's 4 comments addressed in PS2; awaiting re-review | Wait for Sebastian/Viktoria review |
+| [T403152](https://phabricator.wikimedia.org/T403152) | Download announcement | [1270609](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1270609) | **PS3** (rebased locally on `T403152-ps3`; push if not yet done) | was +2 on PS1; needs trusted `recheck` | Viktoria's 4 comments addressed in PS2; **check reply drafts were SENT** | Push PS3, send drafts, get CI kicked |
 | [T402522](https://phabricator.wikimedia.org/T402522) | Download request API | [1270914](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1270914) | **PS2** | pending PS2 run | No comments yet | Wait for CI, then review |
 | [T407468](https://phabricator.wikimedia.org/T407468) | Download job | [1271020](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1271020) | **PS2** | was -1 on PS1 (phan); fixed in PS2 | No comments yet | Wait for CI, then review |
 | [T402526](https://phabricator.wikimedia.org/T402526) | Special page UI | [1271979](https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikispeech/+/1271979) | PS1 | — | **Needs rebase** onto new parent chain | Rebase onto 1271020 PS2 (see "Pending") |
@@ -149,6 +149,26 @@ lives in the untracked files noted in `docs/dev-environment-notes.md`.
    note on each explaining what changed.
 
 ---
+
+## Session addendum (2026-07-06)
+
+- **T403152 rebased to PS3** on local branch `T403152-ps3`: PS2 had gone stale
+  against master (Merge Conflict banner; Zuul can't build an unmergeable
+  change, so even `recheck` was a no-op). Rebase was conflict-light: only
+  `CHANGES.md` needed manual keep-both resolution (entry moved into the
+  0.1.16-SNAPSHOT section above the released 0.1.15 block); the other shared
+  files auto-merged. No code changes; phan/phpcs/phpunit (7/7) all clean
+  first run. Push as PS3 with note "rebased onto current master, no code
+  changes".
+- **Draft-comment trap discovered**: the five replies to Viktoria's review
+  threads were sitting as unsent Gerrit DRAFTS ("5 drafts" in the Comments
+  header) — invisible to reviewers. Fix: Reply button → Send. Check this is
+  done; drafts do NOT publish when a patchset is pushed.
+- **CI trust discovered**: Zuul does not auto-run CI for non-allowlisted
+  contributors, and a `recheck` from the change owner is ignored — it must
+  come from a trusted user (this is why Pppery's `recheck`s worked and ours
+  don't). Ask Sebastian to kick rechecks on 1270609/1270914/1271020 and to
+  help get added to the allowlist (`integration/config`).
 
 ## Pending work / next actions
 
